@@ -6,15 +6,18 @@
 /*   By: tvo <tvo@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 20:23:00 by tvo               #+#    #+#             */
-/*   Updated: 2023/04/08 21:25:10 by tvo              ###   ########.fr       */
+/*   Updated: 2023/04/08 21:55:15 by tvo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char ch)
+void	ft_putstr(char *str)
 {
-	write(1, &ch, 1);
+	int i = 0;
+
+	while (str[i])
+		write(1, &str[i++], 1);
 }
 
 int	main(int ac, char **av)
@@ -23,31 +26,14 @@ int	main(int ac, char **av)
 	{
 		int	i = 0;
 		int	j = 0;
-		int	wd = 0;
 
 		while (av[2][i])
 		{
-			if (av[2][i] == av[1][j])
-			{
-				i++;
+			if (av[2][i++] == av[1][j])
 				j++;
-				wd++;
-			}
-			else
-				i++;
 		}
-		j = 0;
-		while (av[1][j])
-			j++;
-		if (j == wd)
-		{
-			j = 0;
-			while (av[1][j])
-			{
-				ft_putchar(av[1][j]);
-				j++;
-			}
-		}
+		if (!av[1][j])
+			ft_putstr(av[1]);
 	}
-	ft_putchar('\n');
+	write(1, "\n", 1);
 }
